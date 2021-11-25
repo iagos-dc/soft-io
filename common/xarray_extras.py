@@ -226,15 +226,12 @@ def regrid(ds, target_coords, method='mean', tolerance=1e-3, skipna=None, keep_a
                                  f'ds[{coord_label}] = {ds[coord_label]}\n'
                                  f'target_coord = {target_coord}')
             window_size[coord_label] = len(ds[coord_label]) // len(target_coord)
-        coarsen_kwargs = {'keep_attrs': keep_attrs} if keep_attrs is not None else {}
-        coarsen_ds = ds.coarsen(dim=window_size, boundary='exact', coord_func='mean', **coarsen_kwargs)
+        coarsen_ds = ds.coarsen(dim=window_size, boundary='exact', coord_func='mean')
         coarsen_ds_agg_method = getattr(coarsen_ds, method)
         if skipna is not None:
             agg_method_kwargs['skipna'] = skipna
         if keep_attrs is not None:
             agg_method_kwargs['keep_attrs'] = keep_attrs
-        if isinstance(coarsen_ds, xr.core.rolling.DataArrayCoarsen):
-            agg_method_kwargs.pop('keep_attrs', None)
         regridded_ds = coarsen_ds_agg_method(**agg_method_kwargs)
 
         # adjust coordinates of regridded_ds so that they fit to target_coords
