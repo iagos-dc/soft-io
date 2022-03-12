@@ -16,7 +16,7 @@ setup(
     ],
     install_requires=[
         'pandas',
-        'xarray >= 0.15.1',
+        'xarray>=0.19',
         'numpy',
         'tqdm',
         'scipy',
