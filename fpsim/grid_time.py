@@ -15,10 +15,10 @@ def _assign_position_coords(fp_ds):
     rel_time_end = sim_end + xr.where(fp_ds.RELSTART > fp_ds.RELEND, fp_ds.RELSTART, fp_ds.RELEND).compute()
     fp_ds = fp_ds.assign_coords({
         'release_time': ('pointspec', (rel_time_start + (rel_time_end - rel_time_start) / 2).data),
-        'release_lon': ('pointspec', (longitude.geodesic_longitude_midpoint(fp_ds['RELLNG1'], fp_ds['RELLNG2']).data)),
+        'release_lon': ('pointspec', longitude.geodesic_longitude_midpoint(fp_ds['RELLNG1'], fp_ds['RELLNG2']).data),
         'release_lat': ('pointspec', ((fp_ds['RELLAT1'] + fp_ds['RELLAT2']) / 2).data),
         'release_pressure': ('pointspec', (100. * (fp_ds['RELZZ1'] + fp_ds['RELZZ2']) / 2).data),
-        'release_npart': ('pointspec', (fp_ds['RELPART']).data),
+        'release_npart': ('pointspec', fp_ds['RELPART'].data),
     })
     return fp_ds.set_index({'pointspec': 'release_time'}).rename({'pointspec': 'release_time'})
 
@@ -56,7 +56,7 @@ def aggregate_in_time(ds, time_aggr='24h'):
     dt = pd.Timedelta(abs(t[0] - t[1]).values)
     if time_aggr % dt != pd.Timedelta(0):
         raise ValueError(f'time_aggr={time_aggr} must be a multiple of dt={dt}')
-    return ds.coarsen(dim={'time': time_aggr // dt}, boundary='trim', coord_func='min', keep_attrs=True)\
+    return ds.coarsen(dim={'time': time_aggr // dt}, boundary='trim', coord_func='min')\
         .sum(keep_attrs=True)
 
 

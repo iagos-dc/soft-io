@@ -20,5 +20,4 @@ from softio.core import (
 
 from softio.postprocess import (
     emission_contrib_postprocess,
-    emission_contrib_interpolate_along_flight,
 )
