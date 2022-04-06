@@ -6,6 +6,7 @@ Sauvage, B., Fontaine, A., Eckhardt, S., Auby, A., Boulanger, D., Petetin, H., P
 
 ## Source code structure
 The main part of the code source is in `softio` package. The main routine of that package is `get_co_contrib`.
+See also the jupyter notebook `sotfio_starter.ipynb` for an example of usage.
 
 
 ## Deployment
