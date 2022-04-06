@@ -33,10 +33,15 @@ def rt_transform_by_air_density(rt, oro):
 
 def get_co_contrib(emission_inventory, fpsim_ds=None, fpsim_dir=None, time_granularity=None):
     """
-
-    :param fpsim_dir:
+    Main routine which calculates SOFT-IO CO contribution data for a given emission inventory and
+    based on FLEXPART simulation result (given as fpsim_ds or fpsim_dir). The time resolution of CO contribution
+    result is gridded according to a given time granularity
     :param emission_inventory: str; possible values: 'gfas', 'maccity', 'ceds2'
-    :return:
+    :param fpsim_ds: xarray.Dataset containing FLEXPART simulation result as provided by the routing fpsim.open_fp_dataset
+    :param fpsim_dir: str or path-like; a path to
+    :param time_granularity: None or any object convertible to pandas.Timedelta;
+    if None then the time granularity of FLEXPART simulation result will be applied
+    :return: xarray.Dataset with CO contribution data
     """
     if fpsim_ds is None and fpsim_dir is None or fpsim_ds is not None and fpsim_dir is not None:
         raise ValueError('either fpsim_ds or fpsim_dir must be set')
