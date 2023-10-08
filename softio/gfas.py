@@ -10,10 +10,8 @@ GFAS_EMISSION_FLUX = 'cofire'
 
 # prepare gfas_ds
 gfas_v1_2_urls = [
-    '/o3p/iagos/softio/EMISSIONS/GFASv1.2_CO_2003_2017.nc',
-    '/o3p/iagos/softio/EMISSIONS/GFASv1.2_CO_20171031_20180130.nc',
-    '/o3p/iagos/softio/EMISSIONS/GFASv1.2_CO_20171130_20200530.nc',
-    '/o3p/iagos/softio/EMISSIONS/GFASv1.2_CO_since_20191130.nc'
+    '/o3p/iagos/softio/EMISSIONS/GFASv1.2_CO_20030101-20230702.nc',
+    '/o3p/iagos/softio/EMISSIONS/GFASv1.2_CO_since_20230703.nc',
 ]
 
 gfas_ds = {}
